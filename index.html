@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat JVT</title>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+    <!-- Include Prism.js Core -->
+    <link href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-okaidia.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.js"></script>
+
+    <!-- Include Plugins for Line Numbers -->
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/line-numbers/prism-line-numbers.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/line-numbers/prism-line-numbers.css" rel="stylesheet" />
+
+    <!-- Include Language Definitions for Multiple Languages -->
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-abap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-actionscript.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-ada.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-apacheconf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-applescript.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-bash.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-c.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-cpp.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-csharp.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-dart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-erlang.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-go.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-java.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-javascript.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-json.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-kotlin.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-lisp.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-markup.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-markup-templating.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-perl.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-php.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-python.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-ruby.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-rust.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-sass.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-scss.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-shell.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-sql.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-typescript.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-vb.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-vhdl.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-xml.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-yaml.min.js"></script>
+
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; }
+        textarea { width: 100%; height: 80px; font-size: 16px; }
+        button { padding: 10px 20px; margin-top: 10px; font-size: 16px; }
+        #response-container { margin-top: 20px; }
+        .response-section { border: 1px solid #ddd; padding: 10px; margin-top: 10px; min-height: 100px; font-size: 16px; }
+        .prompt { font-weight: bold; margin-top: 10px; }
+        .prompt-box { margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <h2>Chat JVT</h2>
+
+    <label for="modelSelect">Select Model:</label>
+    <select id="modelSelect">
+        <option value="deepseek-r1:7b">deepseek-r1:7b</option>
+        <option value="deepseek-coder-v2:16b">deepseek-coder-v2:16b</option>
+        <option value="deepseek-r1:14b">deepseek-r1:14b</option>
+        <!-- Add more models as needed -->
+    </select>
+
+    <div id="response-container"></div>
+
+    <div class="prompt-box">
+        <textarea id="prompt" placeholder="Enter your prompt..."></textarea>
+        <br>
+        <button onclick="sendRequest()">Send</button>
+    </div>
+
+    <script>
+        function sendRequest() {
+            let prompt = document.getElementById("prompt").value;
+            let responseContainer = document.getElementById("response-container");
+            let selectedModel = document.getElementById("modelSelect").value; // Get selected model
+            let raw = '';
+            // Create a new section for the prompt and response
+            let responseSection = document.createElement("div");
+            responseSection.className = "response-section";
+
+            // Create a prompt section
+            let promptSection = document.createElement("div");
+            promptSection.className = "prompt";
+            promptSection.innerText = `Prompt: ${prompt}`;
+            responseSection.appendChild(promptSection);
+
+            // Create a response div
+            let responseDiv = document.createElement("div");
+            responseSection.appendChild(responseDiv);
+            responseContainer.appendChild(responseSection);
+
+            // Initialize an EventSource to listen for streaming response
+            let eventSource = new EventSource(`http://192.168.100.77:6969/stream?prompt=${encodeURIComponent(prompt)}&model=${encodeURIComponent(selectedModel)}`);
+
+            eventSource.onmessage = function(event) {
+                // Append the new text chunk to the existing content in the response div
+                let newText = event.data;
+
+                // Replace newlines with <br> tags for proper formatting
+                // newText = newText.replace(/\n/g, "<br>");
+
+                // Append the modified text
+                // responseDiv.innerHTML += newText;
+                raw += newText === '' ? '\n' : newText
+                // Use marked.js to parse the Markdown content and render HTML
+                let markdownContent = marked.parse(raw);
+
+                // Clear the div and update with the rendered markdown
+                responseDiv.innerHTML = markdownContent;
+
+                // Apply Prism.js for syntax highlighting and line numbers
+                Prism.highlightAll(); // This ensures syntax highlighting is applied
+            };
+
+            eventSource.onerror = function() {
+                eventSource.close();  // Close the connection on error
+            };
+
+            // Clear the input after sending the request
+            document.getElementById("prompt").value = "";
+        }
+    </script>
+</body>
+</html>
